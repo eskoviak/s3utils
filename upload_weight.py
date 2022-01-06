@@ -1,8 +1,7 @@
 import os
+from pathlib import Path
 import boto3
 from botocore.exceptions import NoCredentialsError
-
-datafile = os.path.expanduser('~/iCloud/Downloads/Weight History.csv')
 
 def upload_to_aws(local_file, bucket, s3_file):
     s3 = boto3.client('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
@@ -20,8 +19,10 @@ def upload_to_aws(local_file, bucket, s3_file):
         return False
 
 if __name__ == '__main__':
-    uploaded = upload_to_aws(datafile, os.environ['WEIGHT_HISTORY_BUCKET'],
-	os.environ['WEIGHT_HISTORY_KEY'])
+    p = Path(os.path.expanduser('~/iCloud/Downloads/Weight History'))
+    for file in p.glob('*.csv'):
+        upload_to_aws(str(file), os.environ['WEIGHT_HISTORY_BUCKET'], f"Data Sets/Weight History/{os.path.basename(file)}")
+
 
 
 
