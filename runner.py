@@ -33,8 +33,10 @@ for item in test_paths:
 
 s3_object = S3_object()
 config = dotenv_values(".env")
-print(s3_object.upload_s3('~/iCloud/Downloads/Budget Input.csv', config['S3_BUCKET'], key_prefix=config['DATA_SETS']))
+bytes_written = s3_object.upload_s3('~/iCloud/Downloads/Budget Input.csv', config['S3_BUCKET'], key_prefix=config['DATA_SETS'])
 
+#print(s3_object.upload_s3('~/iCloud/Downloads/Budget Input.csv', config['S3_BUCKET'], key_prefix=config['DATA_SETS']))
+print(f"{bytes_written} bytes upoaded")
 
 
 

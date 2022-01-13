@@ -1,3 +1,5 @@
 **/vpython3.10-macos
 
 **/.env
+
+**/__pycache__

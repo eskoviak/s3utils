@@ -4,6 +4,7 @@
 
 """
 #import os
+from lib2to3.pgen2.token import NUMBER
 from pathlib import Path
 from enum import Enum
 from dotenv import dotenv_values
@@ -22,9 +23,14 @@ class S3_object():
     """This cleass provides action methods on the S3 objects
 
     """
+    _number_bytes_written = 0
+
     def __init__(self, test=False) -> None:
         self.test = test
         self.config = dotenv_values(".env")
+
+    def _update_number_bytes_written(self, num : float):
+        self._number_bytes_written += num
 
     def _upload_to_aws(self, local_file, bucket, s3_file):
         """private function to access S3
@@ -42,7 +48,8 @@ class S3_object():
         s3 = boto3.client('s3', aws_access_key_id=self.config['AWS_ACCESS_KEY_ID'],
                         aws_secret_access_key=self.config['AWS_SECRET_ACCESS_KEY'])
         try:
-            return s3.upload_file(local_file, bucket, s3_file)
+            s3.upload_file(local_file, bucket, s3_file, Callback=self._update_number_bytes_written )
+            return self._number_bytes_written
         except FileNotFoundError:
             print("The file was not found")
         except NoCredentialsError:
