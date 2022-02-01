@@ -48,12 +48,21 @@ class S3_object():
         s3 = boto3.client('s3', aws_access_key_id=self.config['AWS_ACCESS_KEY_ID'],
                         aws_secret_access_key=self.config['AWS_SECRET_ACCESS_KEY'])
         try:
+            self._number_bytes_written = 0
             s3.upload_file(local_file, bucket, s3_file, Callback=self._update_number_bytes_written )
             return self._number_bytes_written
         except FileNotFoundError:
             print("The file was not found")
         except NoCredentialsError:
             print("Credentials not available")
+
+    def _archive_s3_object(self, bucket, source_file, target_file):
+        """private function to archive a file
+        
+        :param source_file: the source file to archive
+        :type source_file: pathlib.PosixPath
+        
+        """        
 
     def upload_s3(self, local_path, bucket, key_prefix=None, key=None):
         """Public callable for object upload 
