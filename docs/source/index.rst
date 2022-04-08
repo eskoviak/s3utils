@@ -3,14 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Object's documentation!
-==================================
+Welcome to the Documentation for S3 Utilities
+=============================================
+
+A collection of utilities in a python module for accessing files on AWS S3.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   sections/object
+   sections/s3_object
 
 
 

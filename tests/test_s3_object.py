@@ -13,13 +13,13 @@ class Test_Upload_S3(unittest.TestCase):
 
     def test_directory_only(self):
         with self.assertRaises(KeyError):
-            self.s3_object.upload_s3('~/iCloud/Downloads/Weight History', 'bogus')
+            self.s3_object.upload_s3('./tests/test_data', 'bogus')
 
     def test_directory_with_files(self):
-        self.assertEquals(outcome.SINGLETARGET, self.s3_object.upload_s3('~/iCloud/Downloads/Weight History/Data Frame-Weight Input.csv', 'bogus'))
+        self.assertEquals(outcome.SINGLETARGET, self.s3_object.upload_s3('./tests/test_data/test_file.csv', 'bogus'))
 
     def test_director_with_wild_card(self):
-        self.assertEquals(outcome.MULTITARGET, self.s3_object.upload_s3('~/iCloud/Downloads/Weight History/*.csv', 'bogus'))
+        self.assertEquals(outcome.MULTITARGET, self.s3_object.upload_s3('./tests/test_data/*.csv', 'bogus'))
     
 
 

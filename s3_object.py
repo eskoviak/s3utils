@@ -39,7 +39,7 @@ class S3_object():
         :type local_file: pathlib.PosixPath
         :param bucket: the S3 bucket
         :tyupe bucket: str
-        :param s3_file:  the remote key (fileame) including and pathing
+        :param s3_file:  the remote key (fileame) including any pathing
         :type s3_file: str
         :return: the client status
         :rtype: str
@@ -58,7 +58,7 @@ class S3_object():
     def upload_s3(self, local_path, bucket, key_prefix=None, key=None):
         """Public callable for object upload 
         
-        :param local_asset: The specifier for the local asset; can be a singe file or a file spece (i.e. '*.csv')
+        :param local_asset: The specifier for the local asset; can be a singe file or a file spece (i.e. '\*.csv')
         :type local_asset: pathlib.PosixPath
         :param bucket: the AWS S3 bucket name
         :type bucket: str
